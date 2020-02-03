@@ -73,11 +73,10 @@ class Courses extends Component {
       filteredCourses = courses
     }
 
-    if (asc) {
-      filteredCourses.sort()
-    } else {
-      filteredCourses.reverse()
-    }
+    if (!asc) {
+      let tempCourses = [...filteredCourses]
+      filteredCourses = tempCourses.reverse()
+    } 
 
     return (
       <div>
