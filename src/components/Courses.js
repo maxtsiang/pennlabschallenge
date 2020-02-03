@@ -2,7 +2,13 @@ import React, { Component } from "react";
 
 import Course from "./Course";
 
-import { Snackbar, Button, Menu, MenuItem } from "@material-ui/core";
+import {
+  Snackbar,
+  Button,
+  Menu,
+  MenuItem,
+  Typography
+} from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 
 import DoneOutlinedIcon from "@material-ui/icons/DoneOutlined";
@@ -144,6 +150,15 @@ class Courses extends Component {
               );
             })
           : null}
+        {courses.length === 0 ? (
+          <Typography
+            variant="h6"
+            color="inherit"
+            style={{ fontStyle: "italic" }}
+          >
+            Empty
+          </Typography>
+        ) : null}
       </div>
     );
   }
