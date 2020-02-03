@@ -3,29 +3,31 @@ import {Link} from "react-router-dom"
 
 import { connect } from "react-redux";
 
-import { AppBar, Toolbar, Typography, Grid } from '@material-ui/core'
+import { AppBar, Toolbar, Typography, Grid, Button } from '@material-ui/core'
+
+import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
 
 class Nav extends Component {
   render() {
     const { cart } = this.props
     return (
       <div>
-        <AppBar position="static">
+        <AppBar position="static" color="primary">
           <Toolbar>
-          <Grid container justify="space-between" spacing={1}>
+          <Grid container justify="space-between" spacing={0}>
             <Grid item>
-              <Link to={"/"}>
-                <Typography variant="title" color="inherit">
+              <Typography variant="title" color="inherit">
+                <Button color="inherit" component={Link} to="/">
                   Penn Course Cart
-                </Typography>
-              </Link>
+                </Button>
+              </Typography>
             </Grid>
             <Grid item>
-              <Link to={"/cart"}>
-                <Typography variant="title" color="inherit">
-                  Cart {cart.length}
-                </Typography>
-              </Link>
+              <Typography variant="title" color="inherit">
+                <Button color="inherit" component={Link} to="/cart">
+                  <ShoppingCartRoundedIcon /> {cart.length}
+                </Button>
+              </Typography>
             </Grid>
           </Grid>
             

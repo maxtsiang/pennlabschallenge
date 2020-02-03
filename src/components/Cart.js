@@ -7,14 +7,17 @@ import { connect } from "react-redux";
 import Courses from "./Courses"
 import CourseDetail from "./CourseDetail"
 
-import { Grid } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
+
+import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
 
 class Cart extends Component {
 
   constructor(props) {
     super(props)
     this.state = ({
-      selected: null
+      selected: null,
+      courseFromApi: null,
     })
   }
 
@@ -22,6 +25,21 @@ class Cart extends Component {
     this.setState({
       selected: course
     })
+    fetch("https://api.pennlabs.org/registrar/search?q="+course.dept+"-"+course.number)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          if (result && result.courses.length > 0) {
+            this.setState({
+              courseFromApi: result.courses[0]
+            })
+          }
+          
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
   }
 
   onRemoveHandler = (course) => {
@@ -34,23 +52,27 @@ class Cart extends Component {
   }
 
   render() {
-    const { selected } = this.state
+    const { selected, courseFromApi } = this.state
     const { cart } = this.props
     return (
       <div>
         <Nav />
         <Grid container spacing={1}>
-          <Grid item xs={12} sm={7} >
-            Cart
+          <Grid item xs={12} sm={7} style={{padding: 30}}>
+            <Typography variant="h4" color="inherit" style={{paddingBottom: 10}}>
+              <ShoppingCartRoundedIcon fontSize="inherit" style={{margin: -5}}/> Cart
+            </Typography>
             {cart.length === 0 ?
-              <div>Empty</div>
+              <Typography variant="h6" color="inherit" style={{fontStyle: 'italic'}}>
+                Empty
+              </Typography>
               :
               null
             }
-            <Courses courses={cart} onSelectHandler={this.onSelectHandler} onRemoveHandler={this.onRemoveHandler} />
+            <Courses isCartPage={true} selected={selected} courses={cart} onSelectHandler={this.onSelectHandler} onRemoveHandler={this.onRemoveHandler} />
           </Grid>
-          <Grid item xs={12} sm={5} >
-            <CourseDetail course={selected}/>
+          <Grid item xs={12} sm={5} style={{padding: 30}}>
+            <CourseDetail courseFromApi={courseFromApi} course={selected}/>
           </Grid>
         </Grid>
       </div>
