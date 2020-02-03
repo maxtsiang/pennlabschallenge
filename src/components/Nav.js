@@ -1,11 +1,46 @@
-import React from 'react'
+import React, { Component } from 'react'
+import {Link} from "react-router-dom"
 
-export default () => (
-  <div style={{
-    width: '100%',
-    padding: '0 1rem',
-    borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
-  }}>
-    <h2>Penn Course Cart</h2>
-  </div>
-)
+import { connect } from "react-redux";
+
+import { AppBar, Toolbar, Typography, Grid } from '@material-ui/core'
+
+class Nav extends Component {
+  render() {
+    const { cart } = this.props
+    return (
+      <div>
+        <AppBar position="static">
+          <Toolbar>
+          <Grid container justify="space-between" spacing={1}>
+            <Grid item>
+              <Link to={"/"}>
+                <Typography variant="title" color="inherit">
+                  Penn Course Cart
+                </Typography>
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link to={"/cart"}>
+                <Typography variant="title" color="inherit">
+                  Cart {cart.length}
+                </Typography>
+              </Link>
+            </Grid>
+          </Grid>
+            
+          </Toolbar>
+        </AppBar>
+        
+      </div>
+    )
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    cart: state.cart,
+  };
+};
+
+export default connect(mapStateToProps, null)(Nav);

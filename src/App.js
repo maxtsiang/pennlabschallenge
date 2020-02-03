@@ -1,24 +1,18 @@
 import React, { Component } from 'react'
 import './App.css'
 
-import Nav from './components/Nav'
-import Courses from './components/Courses'
+import Home from './components/Home'
 import Cart from './components/Cart'
+
+import { BrowserRouter, Route } from "react-router-dom"
 
 class App extends Component {
   render() {
     return (
-      <>
-        <Nav />
-        <div style={{
-          width: '100%',
-          boxSizing: 'border-box',
-          padding: '0 calc(1rem + 10%)',
-        }}>
-          <Courses />
-          <Cart />
-        </div>
-      </>
+      <BrowserRouter>
+        <Route exact path='/' component={Home} /> 
+        <Route exact path='/cart' component={Cart} />
+      </BrowserRouter>
     );
   }
 }

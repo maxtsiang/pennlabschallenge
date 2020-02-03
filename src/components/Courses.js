@@ -1,14 +1,21 @@
-import React from 'react'
-import courses from '../data/courses'
+import React, { Component } from 'react'
 
-export default () => (
-  <>
-    {courses.map(({ dept, number }) => (
-      <p key={`${dept}-${number}`}>
-        {dept}
-        {' '}
-        {number}
-      </p>
-    ))}
-  </>
-)
+import Course from './Course'
+
+class Courses extends Component {
+
+  render() {
+    const { courses } = this.props
+    return (
+      <div>
+        {courses.map((course) => {
+          return (
+            <Course data={course} {...this.props}/>
+            );
+        })}
+      </div>
+    )
+  }
+}
+
+export default Courses
