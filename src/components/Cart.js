@@ -62,6 +62,7 @@ class Cart extends Component {
             <Typography variant="h4" color="inherit" style={{paddingBottom: 10}}>
               <ShoppingCartRoundedIcon fontSize="inherit" style={{margin: -5}}/> Cart
             </Typography>
+            <Courses isCartPage={true} selected={selected} courses={cart} onSelectHandler={this.onSelectHandler} onRemoveHandler={this.onRemoveHandler} />
             {cart.length === 0 ?
               <Typography variant="h6" color="inherit" style={{fontStyle: 'italic'}}>
                 Empty
@@ -69,7 +70,6 @@ class Cart extends Component {
               :
               null
             }
-            <Courses isCartPage={true} selected={selected} courses={cart} onSelectHandler={this.onSelectHandler} onRemoveHandler={this.onRemoveHandler} />
           </Grid>
           <Grid item xs={12} sm={5} style={{padding: 30}}>
             <CourseDetail courseFromApi={courseFromApi} course={selected}/>

@@ -7,10 +7,6 @@ class CourseDetail extends Component {
   render() {
     const { course, courseFromApi } = this.props
 
-    if (courseFromApi) {
-      console.log(courseFromApi)
-    }
-
     return (
       <div>
           {course ? 
@@ -26,7 +22,7 @@ class CourseDetail extends Component {
                 {course.description}
               </Typography>
               <br />
-              {course.prereqs && course.prereqs.isArray ?
+              {course.prereqs ?
                 <div>
                   <Typography variant="body1" color="inherit">
                     <div style={{fontStyle: 'italic'}}>Prerequisites</div>
